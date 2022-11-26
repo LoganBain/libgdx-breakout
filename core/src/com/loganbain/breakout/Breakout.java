@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class Breakout extends ApplicationAdapter {
     ShapeRenderer shape;
-    ArrayList<Ball> balls;
+    Ball ball;
 
     int x = 50;
     int xSpeed = 5;
@@ -18,20 +18,7 @@ public class Breakout extends ApplicationAdapter {
 
     public void create() {
         shape = new ShapeRenderer();
-        balls = new ArrayList<>();
-        Random r = new Random();
-
-        // create 10 randomly sized and located balls
-        for (int i = 0; i < 10; i++) {
-            balls.add(new Ball(
-                    r.nextInt(Gdx.graphics.getWidth()), // random x location up to application width
-                    r.nextInt(Gdx.graphics.getHeight()), // random y location up to application height
-                    r.nextInt(100), // random circle radius up to 100
-                    r.nextInt(15), // random xSpeed up to 15
-                    r.nextInt(15))); // random ySpeed up to 15
-        }
-
-        // ball = new Ball(150, 200, 70, 12, 5);
+        ball = new Ball(150, 200, 25, 8, 3);
     }
 
     public void render() {
@@ -39,10 +26,8 @@ public class Breakout extends ApplicationAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         shape.begin(ShapeRenderer.ShapeType.Filled);
-        for (Ball ball : this.balls) {
-            ball.update();
-            ball.draw(shape);
-        }
+        ball.update();
+        ball.draw(shape);
         shape.end();
     }
 }
