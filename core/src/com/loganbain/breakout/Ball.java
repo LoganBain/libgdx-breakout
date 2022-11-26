@@ -63,4 +63,20 @@ public class Ball {
         }
         return false;
     }
+
+    public void checkCollision(Block block) {
+        if (collidesWith(block)) {
+            ySpeed = -ySpeed;
+            block.destroyed = true;
+        }
+    }
+    private boolean collidesWith(Block block) {
+        if (this.leftLimit <= block.getRightLimit()
+                && block.getRightLimit() <= this.rightLimit + block.getWidth()
+                && this.upperLimit >= block.getLowerLimit()
+                && block.getLowerLimit() >= this.lowerLimit - block.getHeight()) {
+            return true;
+        }
+        return false;
+    }
 }
